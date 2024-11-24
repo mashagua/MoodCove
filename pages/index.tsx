@@ -8,6 +8,7 @@ interface AIResponse {
   songs: Array<{
     name: string;
     artist: string;
+    url?: string;
   }>;
 }
 
@@ -133,8 +134,22 @@ export default function Home() {
                       <li key={index}>
                         <span className={styles.songIcon}>♪</span>
                         <div>
-                          <span className={styles.songName}>{song.name}</span>
-                          <span className={styles.songArtist}> - {song.artist}</span>
+                          {song.url ? (
+                            <a 
+                              href={song.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className={styles.songLink}
+                            >
+                              <span className={styles.songName}>{song.name}</span>
+                              <span className={styles.songArtist}> - {song.artist}</span>
+                            </a>
+                          ) : (
+                            <>
+                              <span className={styles.songName}>{song.name}</span>
+                              <span className={styles.songArtist}> - {song.artist}</span>
+                            </>
+                          )}
                         </div>
                       </li>
                     ))}

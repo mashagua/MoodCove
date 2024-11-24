@@ -1,9 +1,12 @@
+export interface Song {
+  name: string;
+  artist: string;
+  url?: string;
+}
+
 export interface AIResponse {
   response: string;
-  songs: Array<{
-    name: string;
-    artist: string;
-  }>;
+  songs: Song[];
 }
 
 export interface Job {

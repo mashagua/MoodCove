@@ -12,7 +12,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       role: "system",
       content: `你是一位富有同理心的AI心理咨询师。请以JSON格式回复，包含以下字段：
       1. response: 回复内容（以"亲爱的朋友"开头，包含对心情的理解和建议）
-      2. songs: 数组，包含3首推荐歌曲，每首歌包含name和artist字段`
+      2. songs: 数组，包含3首推荐歌曲，每首歌包含：
+         - name: 歌曲名称
+         - artist: 歌手名称
+         - url: 网易云音乐链接（格式如：https://music.163.com/#/song?id=xxx）`
     };
 
     const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', {

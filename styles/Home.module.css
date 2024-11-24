@@ -250,4 +250,25 @@
 .historyMoodHidden {
   background-color: #cbd5e1;
   color: #64748b;
+}
+
+.songLink {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.songLink:hover {
+  color: #2563eb;
+  transform: translateX(5px);
+}
+
+.songLink:hover .songName {
+  color: #2563eb;
+}
+
+.songLink:hover .songArtist {
+  color: #4b5563;
 } 
