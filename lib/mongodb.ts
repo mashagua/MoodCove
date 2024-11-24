@@ -1,14 +1,15 @@
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI!;
+// 声明全局类型
+declare global {
+  var _mongoClientPromise: Promise<MongoClient> | undefined
+}
+
+const uri = process.env.MONGODB_URI as string;
 const options = {};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('请在 .env 文件中添加 MONGODB_URI');
-}
 
 if (process.env.NODE_ENV === 'development') {
   if (!global._mongoClientPromise) {
@@ -21,8 +22,4 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = client.connect();
 }
 
-export async function connectToDatabase() {
-  const client = await clientPromise;
-  const db = client.db();
-  return { client, db };
-} 
+export default clientPromise; 

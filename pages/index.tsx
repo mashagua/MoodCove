@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { Bottle } from '../types';
+import type { Job } from '../types';
 
 export default function Home() {
   const [content, setContent] = useState('');
   const [mood, setMood] = useState('happy');
-  const [bottles, setBottles] = useState<Bottle[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const newBottle: Bottle = {
+    const newJob: Job = {
       id: Date.now().toString(),
       content,
       mood,
       createdAt: new Date()
     };
 
-    setBottles([...bottles, newBottle]);
+    setJobs([...jobs, newJob]);
     setContent('');
   };
 
@@ -57,12 +57,12 @@ export default function Home() {
         </form>
 
         <div className={styles.bottles}>
-          {bottles.map((bottle) => (
-            <div key={bottle.id} className={styles.bottle}>
-              <div className={styles.mood}>{bottle.mood}</div>
-              <div className={styles.content}>{bottle.content}</div>
+          {jobs.map((job) => (
+            <div key={job.id} className={styles.bottle}>
+              <div className={styles.mood}>{job.mood}</div>
+              <div className={styles.content}>{job.content}</div>
               <div className={styles.date}>
-                {bottle.createdAt.toLocaleDateString()}
+                {job.createdAt.toLocaleDateString()}
               </div>
             </div>
           ))}
