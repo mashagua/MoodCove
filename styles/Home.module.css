@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
 }
 
 .main {
@@ -14,16 +14,31 @@
 
 .title {
   text-align: center;
-  color: #333;
+  color: #2c3e50;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
-.inputSection {
+.chatSection {
   background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+}
+
+.inputArea {
+  margin-bottom: 2rem;
+}
+
+.select {
+  width: 120px;
+  padding: 0.8rem;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  color: #2c3e50;
 }
 
 .form {
@@ -31,110 +46,208 @@
   gap: 1rem;
 }
 
-.inputGroup {
-  flex: 1;
-  display: flex;
-  gap: 1rem;
-}
-
-.select {
-  width: 100px;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  background-color: white;
-}
-
 .textarea {
   flex: 1;
-  padding: 0.5rem;
-  height: 60px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 1rem;
+  height: 100px;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
   resize: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .button {
-  padding: 0 1.5rem;
-  height: 60px;
-  background-color: #4a90e2;
+  padding: 0 2rem;
+  background-color: #3498db;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  font-size: 1rem;
 }
 
 .button:hover {
-  background-color: #357abd;
+  background-color: #2980b9;
+  transform: translateY(-1px);
 }
 
-.button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.responseArea {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e1e4e8;
 }
 
-.chatContainer {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 300px);
-  overflow: hidden;
+.aiMessage {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 2rem;
+  border-radius: 16px;
+  color: #2c3e50;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  line-height: 1.8;
+  font-size: 1.1rem;
 }
 
-.messageList {
-  height: 100%;
-  overflow-y: auto;
-  padding: 1.5rem;
-}
-
-.message {
-  max-width: 80%;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-}
-
-.userMessage {
-  margin-left: auto;
-  background-color: #4a90e2;
-  color: white;
-}
-
-.assistantMessage {
-  margin-right: auto;
-  background-color: #f0f2f5;
-  color: #333;
-}
-
-.messageTime {
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-  opacity: 0.7;
+.aiMessage p {
+  margin-bottom: 1.5rem;
+  text-indent: 2em;
 }
 
 .songList {
-  margin-top: 1rem;
-  padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border: none;
 }
 
 .songList h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.9rem;
-  color: #666;
+  color: #1e293b;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .songList ul {
-  margin: 0;
-  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
 }
 
 .songList li {
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.songList li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.songName {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.songArtist {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.songIcon {
+  color: #3b82f6;
+  font-size: 1.2rem;
+}
+
+.historySection {
+  margin-top: 2rem;
+}
+
+.toggleHistory {
+  width: 100%;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #2c3e50;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.toggleHistory:hover {
+  background-color: #e9ecef;
+}
+
+.historyList {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.historyItem {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.historyMood {
+  padding: 0.4rem 1rem;
+  background-color: #e9ecef;
+  border-radius: 20px;
   font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-  color: #4a90e2;
+  color: #2c3e50;
+}
+
+.historyTime {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.toggleVisibility {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.toggleVisibility:hover {
+  background-color: #f1f3f5;
+}
+
+.moodControl {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hideControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.hideControl input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e1e4e8;
+  cursor: pointer;
+}
+
+.historyMood {
+  padding: 0.4rem 1rem;
+  background-color: #e9ecef;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+.historyMoodHidden {
+  background-color: #cbd5e1;
+  color: #64748b;
 } 

@@ -1,14 +1,21 @@
-export type Message = {
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-};
+export interface AIResponse {
+  response: string;
+  songs: Array<{
+    name: string;
+    artist: string;
+  }>;
+}
 
-export type Job = {
+export interface Job {
   id: string;
   content: string;
   mood: string;
   aiResponse: string;
+  songs?: Array<{
+    name: string;
+    artist: string;
+  }>;
   createdAt: Date;
   isPrivate: boolean;
-}; 
+  isMoodHidden: boolean;
+} 

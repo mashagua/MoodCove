@@ -8,6 +8,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { content, mood } = req.body;
 
+    const systemPrompt = {
+      role: "system",
+      content: `你是一位富有同理心的AI心理咨询师。请以JSON格式回复，包含以下字段：
+      1. response: 回复内容（以"亲爱的朋友"开头，包含对心情的理解和建议）
+      2. songs: 数组，包含3首推荐歌曲，每首歌包含name和artist字段`
+    };
+
     const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -16,39 +23,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       body: JSON.stringify({
         model: "Qwen/Qwen2.5-7B-Instruct",
-        messages: [{
-          role: "system",
-          content: "你是一位富有同理心的AI心理咨询师，请针对用户的心情给出温暖的回应和建议，并推荐适合当前心情的音乐。"
-        }, {
+        messages: [systemPrompt, {
           role: "user",
-          content: `用户现在感到${mood}。\n用户说：${content}\n请给出回应和3首适合当前心情的歌曲推荐。`
+          content: `用户现在感到${mood}。\n用户说：${content}`
         }],
         temperature: 0.7,
         top_p: 0.9,
-        frequency_penalty: 0.5,
-        max_tokens: 1000
+        max_tokens: 1000,
+        response_format: { type: "json_object" }
       })
     });
-
-    if (!response.ok) {
-      throw new Error(`API 请求失败: ${response.status}`);
-    }
 
     const data = await response.json();
     console.log('API Response:', data);
 
-    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-      throw new Error('API 返回格式错误');
-    }
-
-    return res.status(200).json({ 
-      response: data.choices[0].message.content 
-    });
+    const aiMessage = JSON.parse(data.choices[0].message.content);
+    
+    return res.status(200).json(aiMessage);
 
   } catch (error) {
     console.error('API Error:', error);
-    return res.status(500).json({ 
-      error: '服务暂时不可用，请稍后再试'
-    });
+    return res.status(500).json({ error: '服务暂时不可用，请稍后再试' });
   }
 } 
